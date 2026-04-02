@@ -254,12 +254,12 @@ export default function App() {
         </section>
 
         {/* Brick Carousel Section */}
-        <section className="py-12 bg-slate-50 overflow-hidden relative">
+        <section className="py-12 bg-slate-50 overflow-hidden relative pointer-events-auto">
           {/* Efecto de desvanecido en los bordes para Glassmorphism */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10" />
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10" />
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 pointer-events-auto">
             {/* Row 1: Left to Right (Espacios Dazzling) */}
             <div className="flex whitespace-nowrap">
               <motion.div
@@ -278,14 +278,16 @@ export default function App() {
               >
                 {/* Usamos las imágenes desde el CDN definido en DAZZLING_ASSETS */}
                 {[...DAZZLING_ASSETS.row1, ...DAZZLING_ASSETS.row1].map((src, idx) => (
-                  <div key={idx} className="w-64 h-48 md:w-80 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
-                    <img
+                  <div key={idx} className="w-64 h-48 md:w-80 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border-2 border-white cursor-pointer">
+                    <motion.img
                       src={src}
                       alt={`Dazzling ${idx}`}
                       loading="lazy" // No bloquea el renderizado inicial
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
                       onLoad={(e) => (e.currentTarget.style.opacity = "1")} // Solo aparece cuando está lista
-                      style={{ opacity: 0, transition: "opacity 0.3s" }}
+                      style={{ opacity: 0, transition: "opacity 0.3s", transform: "translateZ(0)" }}
                     />
                   </div>
                 ))}
@@ -310,14 +312,16 @@ export default function App() {
               >
                 {/* Usamos las imágenes desde el CDN definido en DAZZLING_ASSETS */}
                 {[...DAZZLING_ASSETS.row2, ...DAZZLING_ASSETS.row2].map((src, idx) => (
-                  <div key={idx} className="w-64 h-48 md:w-80 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
-                    <img
+                  <div key={idx} className="w-64 h-48 md:w-80 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border-2 border-white cursor-pointer">
+                    <motion.img
                       src={src}
                       alt={`Dazzling ${idx}`}
                       loading="lazy" // No bloquea el renderizado inicial
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
                       onLoad={(e) => (e.currentTarget.style.opacity = "1")} // Solo aparece cuando está lista
-                      style={{ opacity: 0, transition: "opacity 0.3s" }}
+                      style={{ opacity: 0, transition: "opacity 0.3s", transform: "translateZ(0)" }}
                     />
                   </div>
                 ))}
@@ -413,31 +417,26 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-50 border-t border-slate-200 py-12">
+      <footer className="bg-slate-50 border-t border-slate-200 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-cyan-dazzling rounded flex items-center justify-center">
-                <span className="text-white font-bold text-sm">D</span>
-              </div>
-              <span className="font-bold text-lg tracking-tight text-slate-800">
-                Dazzling <span className="text-cyan-dazzling">Cleaning</span>
-              </span>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <img src={DAZZLING_ASSETS.logo} alt="Dazzling Logo" className="h-14 md:h-12 w-auto object-contain" />
             </div>
 
+            {/* Redes Sociales */}
             <div className="flex gap-6">
-              <a href="#" className="text-slate-400 hover:text-cyan-dazzling transition-colors">
+              <a href="#" className="text-slate-400 hover:text-cyan-dazzling transition-colors p-2 -m-2">
                 <Instagram size={24} />
               </a>
-              <a href="#" className="text-slate-400 hover:text-cyan-dazzling transition-colors">
+              <a href="#" className="text-slate-400 hover:text-cyan-dazzling transition-colors p-2 -m-2">
                 <Facebook size={24} />
-              </a>
-              <a href="#" className="text-slate-400 hover:text-cyan-dazzling transition-colors">
-                <Twitter size={24} />
               </a>
             </div>
 
-            <div className="text-slate-500 text-sm">
+            {/* Copyright */}
+            <div className="text-slate-500 text-sm text-center md:text-right">
               © {new Date().getFullYear()} Dazzling Cleaning and Maintenance. Todos los derechos reservados.
             </div>
           </div>
@@ -446,7 +445,7 @@ export default function App() {
 
       {/* Floating WhatsApp for Mobile */}
       <motion.a
-        href="https://wa.me/123456789"
+        href="https://wa.me/+19547368055"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0, opacity: 0 }}
