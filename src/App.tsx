@@ -33,6 +33,32 @@ const staggerContainer = {
   }
 };
 
+const GITHUB_USER = "maybelinaa15-dev";
+const REPO_NAME = "dazzling";
+// Usamos @main o @master dependiendo de tu rama principal
+const CDN_BASE = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${REPO_NAME}@main/public`;
+
+const DAZZLING_ASSETS = {
+  logo: `${CDN_BASE}/dazzling.png`,
+  row1: [
+    `${CDN_BASE}/imagenes/carrousel1.jpg`,
+    `${CDN_BASE}/imagenes/carrousel2.jpg`,
+    `${CDN_BASE}/imagenes/carrousel3.jpg`,
+    `${CDN_BASE}/imagenes/carrousel4.jpg`,
+    `${CDN_BASE}/imagenes/carrousel5.jpg`,
+    `${CDN_BASE}/imagenes/carrousel6.jpg`,
+    `${CDN_BASE}/imagenes/carrousel7.jpg`,
+  ],
+  row2: [
+    `${CDN_BASE}/imagenes/carrousel8.jpg`,
+    `${CDN_BASE}/imagenes/carrousel9.jpg`,
+    `${CDN_BASE}/imagenes/carrousel10.jpg`,
+    `${CDN_BASE}/imagenes/carrousel11.jpg`,
+    `${CDN_BASE}/imagenes/carrousel12.jpg`,
+    `${CDN_BASE}/imagenes/carrousel13.jpg`,
+  ]
+};
+
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -110,7 +136,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-2">
-              <img src="/dazzling.png" alt="Dazzling Logo" className="h-10" />
+              <img src={DAZZLING_ASSETS.logo} alt="Dazzling Logo" className="h-10" />
             </div>
 
           </div>
@@ -126,7 +152,7 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pointer-events-none">
             <div className="text-center max-w-3xl mx-auto pointer-events-auto">
               <motion.img
-                src="/dazzling.png"
+                src={DAZZLING_ASSETS.logo}
                 alt="Dazzling Cleaning Logo"
                 initial={{ opacity: 0, y: -20, scale: 0.8 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -238,7 +264,11 @@ export default function App() {
             <div className="flex whitespace-nowrap">
               <motion.div
                 animate={{ x: [0, "-50%"] }}
-                style={{ willChange: "transform" }}
+                style={{
+                  willChange: "transform",
+                  WebkitBackfaceVisibility: "hidden", // Forzar renderizado por GPU en Safari/Chrome
+                  backfaceVisibility: "hidden"
+                }}
                 transition={{
                   duration: 60, // Velocidad de la fila 1
                   repeat: Infinity,
@@ -246,13 +276,16 @@ export default function App() {
                 }}
                 className="flex gap-4 pr-4"
               >
-                {/* Usamos tus imágenes locales de public/carousel1.jpg a carousel5.jpg */}
-                {[1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7].map((num, idx) => (
+                {/* Usamos las imágenes desde el CDN definido en DAZZLING_ASSETS */}
+                {[...DAZZLING_ASSETS.row1, ...DAZZLING_ASSETS.row1].map((src, idx) => (
                   <div key={idx} className="w-64 h-48 md:w-80 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
                     <img
-                      src={`/imagenes/carrousel${num}.jpg`} // Ruta local correcta
-                      alt={`Espacio Dazzling ${num}`}
+                      src={src}
+                      alt={`Dazzling ${idx}`}
+                      loading="lazy" // No bloquea el renderizado inicial
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      onLoad={(e) => (e.currentTarget.style.opacity = "1")} // Solo aparece cuando está lista
+                      style={{ opacity: 0, transition: "opacity 0.3s" }}
                     />
                   </div>
                 ))}
@@ -263,7 +296,11 @@ export default function App() {
             <div className="flex whitespace-nowrap">
               <motion.div
                 animate={{ x: ["-50%", 0] }}
-                style={{ willChange: "transform" }}
+                style={{
+                  willChange: "transform",
+                  WebkitBackfaceVisibility: "hidden", // Forzar renderizado por GPU en Safari/Chrome
+                  backfaceVisibility: "hidden"
+                }}
                 transition={{
                   duration: 50, // Velocidad de la fila 2 (diferente para dar profundidad)
                   repeat: Infinity,
@@ -271,13 +308,16 @@ export default function App() {
                 }}
                 className="flex gap-4 pr-4"
               >
-                {/* Usamos tus imágenes locales de public/carousel6.jpg a carousel10.jpg */}
-                {[8, 9, 10, 11, 12, 13, 8, 9, 10, 11, 12, 13].map((num, idx) => (
+                {/* Usamos las imágenes desde el CDN definido en DAZZLING_ASSETS */}
+                {[...DAZZLING_ASSETS.row2, ...DAZZLING_ASSETS.row2].map((src, idx) => (
                   <div key={idx} className="w-64 h-48 md:w-80 md:h-60 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
                     <img
-                      src={`/imagenes/carrousel${num}.jpg`} // Ruta local correcta
-                      alt={`Detalle Dazzling ${num}`}
+                      src={src}
+                      alt={`Dazzling ${idx}`}
+                      loading="lazy" // No bloquea el renderizado inicial
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      onLoad={(e) => (e.currentTarget.style.opacity = "1")} // Solo aparece cuando está lista
+                      style={{ opacity: 0, transition: "opacity 0.3s" }}
                     />
                   </div>
                 ))}
