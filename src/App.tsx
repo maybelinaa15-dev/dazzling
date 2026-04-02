@@ -41,21 +41,21 @@ const CDN_BASE = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${REPO_NAME}@main/p
 const DAZZLING_ASSETS = {
   logo: `${CDN_BASE}/dazzling.png`,
   row1: [
-    `${CDN_BASE}/imagenes/carrousel1.jpg`,
-    `${CDN_BASE}/imagenes/carrousel2.jpg`,
-    `${CDN_BASE}/imagenes/carrousel3.jpg`,
-    `${CDN_BASE}/imagenes/carrousel4.jpg`,
-    `${CDN_BASE}/imagenes/carrousel5.jpg`,
-    `${CDN_BASE}/imagenes/carrousel6.jpg`,
-    `${CDN_BASE}/imagenes/carrousel7.jpg`,
+    `${CDN_BASE}/imagenes/carrousel1.webp`,
+    `${CDN_BASE}/imagenes/carrousel2.webp`,
+    `${CDN_BASE}/imagenes/carrousel3.webp`,
+    `${CDN_BASE}/imagenes/carrousel4.webp`,
+    `${CDN_BASE}/imagenes/carrousel5.webp`,
+    `${CDN_BASE}/imagenes/carrousel6.webp`,
+    `${CDN_BASE}/imagenes/carrousel7.webp`,
   ],
   row2: [
-    `${CDN_BASE}/imagenes/carrousel8.jpg`,
-    `${CDN_BASE}/imagenes/carrousel9.jpg`,
-    `${CDN_BASE}/imagenes/carrousel10.jpg`,
-    `${CDN_BASE}/imagenes/carrousel11.jpg`,
-    `${CDN_BASE}/imagenes/carrousel12.jpg`,
-    `${CDN_BASE}/imagenes/carrousel13.jpg`,
+    `${CDN_BASE}/imagenes/carrousel8.webp`,
+    `${CDN_BASE}/imagenes/carrousel9.webp`,
+    `${CDN_BASE}/imagenes/carrousel10.webp`,
+    `${CDN_BASE}/imagenes/carrousel11.webp`,
+    `${CDN_BASE}/imagenes/carrousel12.webp`,
+    `${CDN_BASE}/imagenes/carrousel13.webp`,
   ]
 };
 
